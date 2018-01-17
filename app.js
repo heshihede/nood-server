@@ -16,6 +16,15 @@ app.set('view engine', 'html');
 var bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({ extended: false }));
 
+//cookie-session插件
+var cookieSession = require('cookie-session')
+app.use(cookieSession({
+  name: 'sid',
+  keys: ['黑马程序员'],//中间件会对cookie数据进行加密，该参数设置加密的钥匙
+  // Cookie Options
+  maxAge: 24 * 60 * 60 * 1000 // 24 hours  //cookie有效期 单位毫秒
+  //一般网站cookie的有效期是一天
+}));
 
 
 //配置路由容器
@@ -39,8 +48,10 @@ app.use(require('./router/user_router.js'));
             if (err) {
                 throw err;
             }
+            var user = req.session.user
             res.render('index.html', {
-                articles : docs
+                articles : docs,
+                user: user
             })
         })
     })

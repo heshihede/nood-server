@@ -63,14 +63,14 @@
 					<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 
 						<ul class="nav navbar-nav navbar-right">
-
-							<!-- <li>
-									<form class="navbar-form navbar-left">
-										<a href="/login" class="btn btn-primary">登陆</a>
-										<a href="/register" class="btn btn-success">注册</a>
-									</form>
-								</li> -->
-
+							{{ if(!user) }}
+							<li>
+								<form class="navbar-form navbar-left">
+									<a href="/login" class="btn btn-primary">登陆</a>
+									<a href="/register" class="btn btn-success">注册</a>
+								</form>
+							</li>
+							{{ else }}
 							<li class="dropdown">
 								<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">发表
 									<span class="caret"></span>
@@ -81,11 +81,10 @@
 									</li>
 								</ul>
 							</li>
-
 							<li class="dropdown">
 								<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-									<span style="color: #F80ED9;font-size:20px"></span>
-									<span class="caret"></span>
+									<span style="color: #F80ED9;font-size:20px">{{ user.nickname }}</span>
+									<span class="caret">{{ user.email }}</span>
 								</a>
 								<ul class="dropdown-menu">
 									<li>
@@ -94,7 +93,7 @@
 
 								</ul>
 							</li>
-
+							{{ /if }}
 						</ul>
 					</div>
 					<!-- /.navbar-collapse -->
